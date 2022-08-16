@@ -84,7 +84,7 @@ const Projects: NextPage = () => {
 					</CardContent>
 				</CardActionArea>
 				<CardActions>
-					<Button color="primary" size="small" style={{ alignSelf: 'end' }}>
+					<Button color="primary" variant="contained" size="small" >
 						Ver código
 					</Button>
 				</CardActions>

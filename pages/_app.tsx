@@ -1,16 +1,13 @@
-import '../styles/globals.css';
 import type { AppProps } from 'next/app';
+import '../styles/globals.css';
 
-import { CssBaseline, ThemeProvider } from '@mui/material';
-
-import { lightTheme, darkTheme } from '../themes';
+import { ThemeUiProvider } from '../context/theme-ui';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
+    <ThemeUiProvider>
       <Component {...pageProps} />
-    </ThemeProvider>
+    </ThemeUiProvider>
   );
 }
 

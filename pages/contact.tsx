@@ -37,6 +37,7 @@ const Contact: NextPage = () => {
 			>
 				<Grid xs={12} md={6}>
 					<TextField
+						color="primary"
 						fullWidth
 						id="name"
 						label="Nombre"
@@ -47,6 +48,7 @@ const Contact: NextPage = () => {
 				</Grid>
 				<Grid xs={12} md={6}>
 					<TextField
+						color="primary"
 						fullWidth
 						id="reason"
 						label="Asunto"
@@ -57,6 +59,7 @@ const Contact: NextPage = () => {
 				</Grid>
 				<Grid xs={12} md={6}>
 					<TextField
+						color="primary"
 						fullWidth
 						id="email"
 						label="Correo"
@@ -67,6 +70,7 @@ const Contact: NextPage = () => {
 				</Grid>
 				<Grid xs={12}>
 					<TextField
+						color="primary"
 						fullWidth
 						id="message"
 						label="Mensaje"
@@ -78,7 +82,7 @@ const Contact: NextPage = () => {
 					/>
 				</Grid>
 				<Grid xs={12}>
-					<Button variant="contained">Enviar</Button>
+					<Button color="primary" variant="contained">Enviar</Button>
 				</Grid>
 			</Grid>
 		</Box>

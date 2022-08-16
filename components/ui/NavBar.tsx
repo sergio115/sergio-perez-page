@@ -1,9 +1,12 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useState, useEffect } from 'react';
 
-import { AppBar, Box, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Divider, Drawer, Grid, IconButton, List, ListItem, ListItemButton, ListItemText, Switch, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import { Link } from 'react-scroll/modules';
+
+import { ThemeUiContext } from '../../context/theme-ui';
+import { lightTheme, darkTheme } from '../../themes';
 
 interface Props {
 	window?: () => Window;
@@ -34,15 +37,41 @@ const navItems = [
 ];
 
 export const NavBar: FC<Props> = ({ window }) => {
+
+	const { setChangeTheme } = useContext(ThemeUiContext);
+
+	const [checked, setChecked] = useState(false);
+
+	useEffect(() => {
+		if (localStorage.getItem("themeUi") === 'dark') {
+			setChecked(true);
+		}
+		else {
+			setChecked(false);
+		}
+
+	}, []);
+
+	const switchHandler = (event: any) => {
+		setChecked(event.target.checked);
+
+		if (!checked) {
+			setChangeTheme(darkTheme);
+		}
+		else {
+			setChangeTheme(lightTheme);
+		}
+	};
+
+
 	const [mobileOpen, setMobileOpen] = useState(false);
 
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
 	};
 
-
 	const desktopMenu: JSX.Element[] = navItems.map((item) => (
-		<Button key={item.key} sx={{ color: '#fff' }}>
+		<Button key={item.key} color='secondary'>
 			<Link
 				activeClass="active"
 				duration={500}
@@ -78,7 +107,7 @@ export const NavBar: FC<Props> = ({ window }) => {
 
 	return (
 		<Box sx={{ display: 'flex' }}>
-			<AppBar component="nav">
+			<AppBar component="nav" >
 				<Toolbar>
 					<IconButton
 						aria-label="open drawer"
@@ -96,8 +125,10 @@ export const NavBar: FC<Props> = ({ window }) => {
 					>
 						SERGIO PÉREZ ROSALES
 					</Typography>
-					<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+					<Box sx={{ display: { xs: 'none', sm: 'block' }, }} justifyContent='center'>
 						{desktopMenu}
+						<Switch checked={checked} onChange={switchHandler} />
+						<Typography display='inline' variant="body1">Modo</Typography>
 					</Box>
 				</Toolbar>
 			</AppBar>
@@ -123,10 +154,15 @@ export const NavBar: FC<Props> = ({ window }) => {
 						<Divider />
 						<List>
 							{mobileMenu}
+							<Divider />
+							<Grid textAlign='start'>
+								<Typography sx={{ padding: '16px' }} display='inline'>Modo</Typography>
+								<Switch checked={checked} onChange={switchHandler} />
+							</Grid>
 						</List>
 					</Box>
 				</Drawer>
 			</Box>
-		</Box>
+		</Box >
 	);
 };

@@ -1,20 +1,24 @@
 import { createTheme } from '@mui/material';
-import { grey, red } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
+
+import { colors } from '../public/colors';
 
 export const lightTheme = createTheme({
   palette: {
     mode: 'light',
     background: {
-      default: grey[300],
+      default: colors.white_background,
+      paper: colors.white,
     },
     primary: {
-      main: '#4a148c',
-    },
-    secondary: {
-      main: '#19857b',
+      main: colors.purple,
+      contrastText: colors.black,
     },
     error: {
       main: red.A400,
+    },
+    text: {
+      primary: colors.black,
     },
   },
 
@@ -24,8 +28,33 @@ export const lightTheme = createTheme({
         elevation: 0,
       },
       styleOverrides: {
-
+        root: {
+          backgroundColor: colors.white,
+          color: colors.black,
+        },
       },
+    },
+
+    MuiButton: {
+      variants: [
+        {
+          props: { color: 'primary', variant: 'contained' },
+          style: {
+            backgroundColor: colors.purple,
+            color: colors.white,
+            ':hover': {
+              backgroundColor: colors.purple_light,
+              color: colors.purple,
+            },
+          },
+        },
+        {
+          props: { color: 'secondary' },
+          style: {
+            color: colors.black,
+          },
+        },
+      ],
     },
   },
 });
